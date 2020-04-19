@@ -1,0 +1,35 @@
+.SiteFooter {
+	display: flex;
+	list-style: none;
+	flex-direction: row;
+	width: 100%;
+	height: 200px;
+	background-color: #333945;
+	color: white;
+	justify-content: space-between;
+}
+.Items {
+	display: flex;
+	
+	flex-basis: auto;
+    justify-content: left;
+    /* border: 1px solid; */
+    list-style: none;
+    width: 80%;
+}
+
+.Items li{
+	box-sizing: border-box;
+    margin: 0px 10px;
+	font-weight: bold;
+	font-size: xx-large;
+    
+}
+.Items li:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+.Items a{
+	color: white;
+	text-decoration: none;
+}

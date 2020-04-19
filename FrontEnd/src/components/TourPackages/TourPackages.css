@@ -1,0 +1,17 @@
+.Packages{
+    background-color: white;
+    width: 100%;
+    height: auto;
+    /* overflow-y: scroll; */
+    margin: 100px 0px;
+    border: 1px solid black;
+   
+}
+.UL{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-basis: 80%;
+    flex-wrap: wrap;
+    justify-content: normal;
+}

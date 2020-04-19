@@ -1,0 +1,18 @@
+.TourPackage {
+	margin: 10px;
+	width: 235px;
+	height: 200px;
+	box-sizing: border-box;
+
+	text-align: center;
+	background-color: #758aa2;
+	border-radius: 15px;
+	padding: 5px;
+}
+.btn {
+	background: darkgray;
+	color: white;
+	border: 1px;
+	border-radius: 3px;
+	cursor: pointer;
+}
