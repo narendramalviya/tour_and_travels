@@ -32,16 +32,16 @@ class TourPackages extends Component {
 		this.setState(
 			{
 				selectedPackage: post,
-			},
-			() => {
+			},() => {
 				console.log(this.state.selectedPackage);
 			}
 		);
+		
 	};
 
 	render() {
-		console.log('[tourPackages.js ] render()');
-		
+		console.log("[tourPackages.js ] render()");
+
 		let tour_packages = this.state.tour_packages;
 		if (tour_packages) {
 			tour_packages = tour_packages.slice(0, 10);
