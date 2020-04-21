@@ -9,7 +9,7 @@ const welcomeSection = () => {
     return (
         <section className={classes.WelcomeSection}>
             {/* <img style={imgStyle} src={image} alt='travelimg' /> */}
-            <h1 style={{ textAlign: 'center' }}>Welcome </h1>
+            <h1 style={{ textAlign: 'center' }}>Welcome Section</h1>
         </section>
     );
 }

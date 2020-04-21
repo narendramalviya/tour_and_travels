@@ -7,6 +7,8 @@ class TourPackageContainer extends Component {
 		  
 	  }
 	render() {
+		console.log('ToutpakcgesContainer.js - ',this.props);
+		
 		return(
 			<TourPackages />
 		);

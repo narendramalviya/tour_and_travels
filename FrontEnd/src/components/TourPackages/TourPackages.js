@@ -40,7 +40,7 @@ class TourPackages extends Component {
 	};
 
 	render() {
-		console.log("[tourPackages.js ] render()");
+		console.log("[tourPackages.js ] ");
 
 		let tour_packages = this.state.tour_packages;
 		if (tour_packages) {
