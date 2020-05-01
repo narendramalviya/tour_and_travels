@@ -1,14 +1,18 @@
 const mongoose = require("mongoose");
-
+const { ObjectId } = mongoose.Schema;
 const packageSchema = new mongoose.Schema({
 	title: {
 		type: String,
 		required: true,
 		trim: true,
 	},
+	user: {
+		type: ObjectId,
+		ref: "User",
+	},
 	discription: {
 		type: String,
-		required: true, 
+		required: true,
 		trim: true,
 	},
 	country: {
@@ -35,4 +39,4 @@ const packageSchema = new mongoose.Schema({
 	},
 });
 
-module.exports = mongoose.model("tour_packages",packageSchema);
+module.exports = mongoose.model("tour_packages", packageSchema);

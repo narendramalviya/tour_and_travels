@@ -29,7 +29,7 @@ var userSchema = new mongoose.Schema({
 		type: String,
 		trim: true,
 	},
-        
+
 	salt: String,
 	role: {
 		type: Number,
@@ -40,24 +40,25 @@ var userSchema = new mongoose.Schema({
 		default: [],
 	},
 });
-userSchema
-	 .virtual("password")
-	 .set(function(password){
-		 this._password = password;
-		 this.salt = uuidv1();
-		 this.encry_password = this.securePassword(password);
-	 })
-	 .get(function(){
-		 return this._password;
-	 })
 
-userSchema.method = {
+userSchema
+	.virtual("password")
+	.set(function (password) {
+		this._password = password;
+		this.salt = uuidv1();
+		this.encry_password = this.securePassword(password);
+	})
+	.get(function () {
+		return this._password;
+	});
+
+userSchema.methods = {
 	authenticate: function (plainpassword) {
 		return this.securePassword(plainpassword) === this.encry_password;
 	},
 
 	securePassword: function (plainpassword) {
-		if (!password) return "";
+		if (!plainpassword) return "";
 		try {
 			return crypto
 				.createHmac("sha256", this.salt)
