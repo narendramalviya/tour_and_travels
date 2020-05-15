@@ -1,12 +1,15 @@
 .SiteFooter {
+    
 	display: flex;
 	list-style: none;
 	flex-direction: row;
 	width: 100%;
-	height: 200px;
+	height: 100px;
 	background-color: #333945;
 	color: white;
 	justify-content: space-between;
+	position:absolute;
+	bottom: 0px;
 }
 .Items {
 	display: flex;

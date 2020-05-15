@@ -3,9 +3,9 @@ const User = require("../models/user");
 const { validationResult } = require("express-validator");
 
 exports.getUserById = (req, res, next, id) => {
-	User.findById(id, (err, user) => {
+	User.findById(id).exec( (err, user) => {
 		if (err || !user) {
-			res.status(404).json({
+			return res.status(404).json({
 				message: "user not found!!" + err,
 			});
 		}
@@ -54,7 +54,7 @@ exports.getAllUsers = (req, res) => {
 };
 
 exports.deleteUser = (req, res) => {
-	User.findByIdAndRemove({ _id: req.profile._id }, (err) => {
+	User.findByIdAndRemove({ _id: req.profile._id }, (err,user) => {
 		if (err) {
 			res.status(500).json({
 				error: err + "failed to remove user",

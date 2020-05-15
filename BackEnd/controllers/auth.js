@@ -8,19 +8,19 @@ exports.signin = (req, res) => {
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		res.status(422).json({
-			errors: errors.array(),
+			error: errors.array(),
 		});
 	}
 	const { email, password } = req.body;
 
 	User.findOne({ email }, (err, user) => {
 		if (err || !user) {
-			res.status(404).json({
-				error: "User email does exist!",
+			return res.status(404).json({
+				error: `User email does exist! err:${err}`,
 			});
 		}
 		if (!user.authenticate(password)) {
-			res.status(404).json({
+			return res.status(404).json({
 				error: "User email and password does not match!",
 			});
 		}
@@ -30,10 +30,10 @@ exports.signin = (req, res) => {
 		res.cookie("token", token, { expire: new Date() + 9999 });
 
 		// send response to frontend
-		const { _id, name, lastname, email, role ,purchases} = user;
+		const { _id, name, lastname, email, role, purchases } = user;
 		return res.json({
 			token,
-            user: { _id, name, lastname, email, role,purchases },
+			user: { _id, name, lastname, email, role, purchases },
 		});
 	});
 };
@@ -44,19 +44,19 @@ exports.signup = (req, res) => {
 	// check error
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
-		res.status(422).json({
-			errors: errors.array(),
+		return res.status(422).json({
+			error: errors.array(),
 		});
 	}
 	user = new User(req.body);
 	user.save((err, user) => {
 		if (err) {
 			return res.status(400).json({
-				err: "Not able to save user in DB",
+				error: `Not able to save user in DB ${err}`,
 			});
 		}
 		const { _id, name, lastname, email, role, purchases } = user;
-		res.json({
+		return res.json({
 			_id,
 			name,
 			lastname,

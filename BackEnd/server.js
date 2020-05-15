@@ -8,6 +8,7 @@ const cookieParser = require("cookie-parser");
 // require routes
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
+const tourPackageRoutes = require("./routes/tour_package");
 //create express app
 const app = express();
 
@@ -41,7 +42,7 @@ app.get("/", (req, res) => {
 });
 
 // routes
-require("./routes/tourPackage.routes")(app);
+app.use("/api", tourPackageRoutes);
 app.use("/api", authRoutes);
 app.use("/api", userRoutes);
 

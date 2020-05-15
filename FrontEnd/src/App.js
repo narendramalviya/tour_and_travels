@@ -1,24 +1,26 @@
 import React, { Component } from "react";
 import classes from "./App.css";
-import { BrowserRouter } from "react-router-dom";
 import Layout from "./hoc/Layout/Layout";
 import Header from "./components/Header/Header";
-import SiteFooter from "./components/Footer/SiteFooter";
+// import SiteFooter from "./components/Footer/SiteFooter";
 import MainContainer from "./container/MainContainer";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { API } from './backend';
 class App extends Component {
 	render() {
+		console.log('api - ',API);
+		
 		return (
-			<BrowserRouter>
+			
 				<div className={classes.App}>
 					<Layout>
 						<Header />
 						<MainContainer />
 
-						<SiteFooter />
+						{/* <SiteFooter /> */}
 					</Layout>
 				</div>
-			</BrowserRouter>
+	
 		);
 	}
 }

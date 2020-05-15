@@ -6,10 +6,6 @@ const packageSchema = new mongoose.Schema({
 		required: true,
 		trim: true,
 	},
-	user: {
-		type: ObjectId,
-		ref: "User",
-	},
 	discription: {
 		type: String,
 		required: true,
@@ -29,7 +25,7 @@ const packageSchema = new mongoose.Schema({
 		type: String,
 		trim: true,
 	},
-	Address: {
+	address: {
 		type: String,
 		trim: true,
 	},

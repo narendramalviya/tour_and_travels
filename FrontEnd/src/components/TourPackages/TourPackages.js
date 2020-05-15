@@ -14,7 +14,7 @@ class TourPackages extends Component {
 
 	UNSAFE_componentWillMount() {
 		axios
-			.get("http://localhost:7000/packages/")
+			.get("http://localhost:7000/api/tourPackages/allTourPackages")
 			.then((responce) => {
 				this.setState({ tour_packages: responce.data });
 			})

@@ -41,6 +41,9 @@ router.post(
 			min: 3,
 		}),
 		check("email", "email must be require").isEmail(),
+		check("password", "password must be at least 3 char").isLength({
+			min: 3,
+		}),
 	],
 	signup
 );
