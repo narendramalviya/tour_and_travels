@@ -1,0 +1,10 @@
+.Table {
+	border: 2px solid black;
+    padding: 5px;
+    width: 100%;
+ 
+}
+.Table,td,th{
+    border: 2px solid black;
+    padding: 5px;
+}

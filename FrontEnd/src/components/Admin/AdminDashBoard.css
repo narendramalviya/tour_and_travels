@@ -1,7 +1,6 @@
 .container {
-	display: block;
-	width: 90%;
-	height: 550px;
+	box-sizing: border-box;
+	width: 100%;
 	border: 2px solid black;
 	margin: auto;
 	margin-top: 5px;
@@ -16,18 +15,18 @@
 	flex-direction: row;
 	border: 2px solid red;
 	display: flex;
-	height: 446px;
+	height: auto;
 	flex-direction: row;
 }
 .leftNavContainer {
 	border: 2px solid red;
     margin: 6px;
     padding: 10px;
-    width: 27%;
+    width: 15%;
 }
 .rightContainer {
 	border: 2px solid green;
 	margin: 6px;
 	padding: 10px;
-	width: 71%;
+	width: 100%;
 }
