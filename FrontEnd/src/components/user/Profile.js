@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import UserForm from "./api/UserForm";
 import Aux from "../../hoc/Aux/Aux";
-import { Jumbotron, Button, Card } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 export default class SignUp extends Component {
 	state = {
 		values: {

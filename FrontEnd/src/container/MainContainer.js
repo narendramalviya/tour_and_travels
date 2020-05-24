@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import TourPackageContainer from "./TourPackageContainer";
-import { Switch, Route } from "react-router-dom";
+// import TourPackageContainer from "./TourPackageContainer";
+import {  Route } from "react-router-dom";
 import Hotel from "../components/Hotel/Hotel";
 import Flight from "../components/Flight/Flight";
 import Train from "../components/Train/Train";
@@ -11,7 +11,7 @@ import SignIn from "../components/user/SignIn";
 import SignUp from "../components/user/SignUp";
 import AdminDashBoard from '../components/Admin/AdminDashBoard';
 import UserDashBoard from '../components/user/UserDashBoard';
-import Profile from '../components/user/Profile';
+// import Profile from '../components/user/Profile';
 
 class MainContainer extends Component {
 	render() {

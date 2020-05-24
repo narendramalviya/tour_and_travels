@@ -50,7 +50,7 @@ exports.getAllTourPackages = (req, res) => {
 	Tour_package.find({}, (err, tourPkgs) => {
 		if (err || !tourPkgs) {
 			res.status(500).send({
-				message: err.message || "Some error occurred .",
+				error: err.message || "Some error occurred .",
 			});
 		}
 		res.json(tourPkgs);

@@ -25,6 +25,7 @@ class AdminDashBoard extends Component {
 								Tour Packages
 							</Link>{" "}
 						</li>
+
 						<li>
 							<Link
 								to={`${this.props.match.path}/packageinquiry`}
@@ -33,7 +34,8 @@ class AdminDashBoard extends Component {
 							</Link>{" "}
 						</li>
 					</div>
-					{/* Routes */}
+				{/*Routes  */}
+
 					<div className={classes.rightContainer}>
 						<Route
 							path={`${this.props.match.path}/profile`}
@@ -44,7 +46,7 @@ class AdminDashBoard extends Component {
 							path={`${this.props.match.path}/tourpackages`}
 							component={TourPackageManager}
 						/>
-						<Route path={`${this.props.match.path}/tourpackages/:id`}component={ViewPackage}/>
+						<Route path={`${this.props.match.path}/tourpackages/:id`} component={ViewPackage}/>
 						<Route
 							path={`${this.props.match.path}/packageinquiry`}
 							render={() => (

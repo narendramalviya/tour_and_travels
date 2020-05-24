@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // import { signup } from "./api/userApi";
-import { API } from "../../backend";
+// import { API } from "../../backend";
 import UserForm from "./api/UserForm";
 import Aux from "../../hoc/Aux/Aux";
 

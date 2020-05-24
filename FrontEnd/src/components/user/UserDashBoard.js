@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Route, Link } from "react-router-dom";
 import Aux from "../../hoc/Aux/Aux";
-import classes from "./UserDashBoard.css";
+// import classes from "./UserDashBoard.css";
 import Profile from "./Profile";
 import { Jumbotron, Card, CardGroup } from "react-bootstrap";
 
