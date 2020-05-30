@@ -1,14 +1,13 @@
-import React from 'react'
-const UserForm = (props)=>{
-	console.log(props);
-	
+import React from 'react';
+
+const SignUpForm = (props)=>{
 		 const {name,lastname,email} = props.user;
 		 const {handleChange,submitHandler} = props
         return (
 			<div className="container-sm">
 				<form>
 					<div className="form-group">
-						<label for="name">Name</label>
+						<label htmlFor ="name">Name</label>
 						<input
 							type="text"
 							className="form-control"
@@ -18,7 +17,7 @@ const UserForm = (props)=>{
 						/>
 					</div>
 					<div className="form-group">
-						<label for="lastname">Last Name</label>
+						<label htmlFor="lastname">Last Name</label>
 						<input
 							type="text"
 							className="form-control"
@@ -28,7 +27,7 @@ const UserForm = (props)=>{
 						/>
 					</div>
 					<div className="form-group">
-						<label for="InputEmail1">Email address</label>
+						<label htmlFor="InputEmail1">Email address</label>
 						<input
 							type="email"
 							className="form-control"
@@ -40,9 +39,9 @@ const UserForm = (props)=>{
 							We'll never share your email with anyone else.
 						</small>
 					</div>
-					{/* TODO: update password */}
-					{/* <div className="form-group">
-						<label for="InputPassword1">Password</label>
+					
+					<div className="form-group">
+						<label htmlFor="InputPassword1">Password</label>
 						<input
 							type="password"
 							className="form-control"
@@ -50,7 +49,7 @@ const UserForm = (props)=>{
 							name="password"
 							onChange={handleChange}
 						/>
-					</div> */}
+					</div>
 
 					<button
 						type="submit"
@@ -67,4 +66,4 @@ const UserForm = (props)=>{
 			</div>
 		);
 }
-export default UserForm;
+export default SignUpForm;

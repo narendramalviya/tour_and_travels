@@ -27,10 +27,13 @@ exports.signin = (req, res) => {
 		// create token
 		const token = jwt.sign({ id: user._id }, process.env.SECRET);
 		// put token in cookie
-		res.cookie("token", token, { expire: new Date() + 9999 });
-
+		res.cookie("token", token, { expire: Date.now() + 2*24*60*60*1000 });
+     
 		// send response to frontend
 		const { _id, name, lastname, email, role, purchases } = user;
+	    res.header('Access-Control-Allow-Credentials', true);
+		res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+      
 		return res.json({
 			token,
 			user: { _id, name, lastname, email, role, purchases },

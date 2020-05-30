@@ -42,7 +42,7 @@ const header = () => {
 					<span onClick={()=>{
 						// TODO: complete this!!
 						alert("signed out clicked!!");
-					return <Redirect to="/signup" />
+					return <Redirect to="/signin" />
 					}}>Sign out</span>
 				</li>
 			</ul>

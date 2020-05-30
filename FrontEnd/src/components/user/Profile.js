@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import UserForm from "./api/UserForm";
 import Aux from "../../hoc/Aux/Aux";
 import { Card } from "react-bootstrap";
+import SignUpForm from './api/SignUpForm';
 export default class SignUp extends Component {
 	state = {
 		values: {
@@ -78,7 +78,7 @@ export default class SignUp extends Component {
 			? this.userDetails()
 			: null;
 		const updateProfileForm = this.state.showUpdateForm ? (
-			<UserForm
+			<SignUpForm
 				user={this.state.values}
 				handleChange={this.handleChange}
 				submitHandler={this.submitHandler}

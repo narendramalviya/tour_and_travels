@@ -1,62 +1,91 @@
 import React, { Component } from "react";
-
+import { signin, authenticate } from "./api/userApi";
+import Aux from "../../hoc/Aux/Aux";
+import Spinner from "../../hoc/UI/Spinner/Spinner";
+import SignInForm from "./api/SignInForm";
 export default class SignIn extends Component {
 	state = {
 		values: {
-			email: "nk@malviya.com",
-			password: "1234",
+			email: "test1@mail.com",
+			password: 1234,
 		},
-		error: false,
+		isLoading: false,
+		error: null,
 		success: false,
-		redirect: false,
 	};
 
-	changeHandler = (name) => {
-		return (event) => {
+	handleChange = (event) => {
+		const { name, value } = event.target;
+		this.setState({
+			values: { ...this.state.values, [name]: value },
+		});
+	};
 
-			this.setState({
-				values: { [name]: event.target.value },
+	submitHandler = (event) => {
+		event.preventDefault();
+		this.setState({ isLoading: true });
+		// TODO:fire signin request here??
+		signin(this.state.values)
+			.then((data) => {
+				console.log(data);
+				if (data.error) {
+					this.setState({
+						error: JSON.stringify(data.error),
+						isLoading: false,
+						success: false,
+					});
+				} else {
+					authenticate(data, () => {
+						this.setState({
+							success: true,
+							error: null,
+							isLoading: false,
+						});
+					});
+				}
+			})
+			.catch((error) => {
+				this.setState({
+					error: "failed to fetch",
+					isLoading: false,
+					success: false,
+				});
+				console.log(error);
 			});
-		};
 	};
-	render() {
-		const { email, password,error,success,redirect } = this.state.values;
-		return (
-			<div className="container-sm">
-				<form>
-					<div className="form-group">
-						<label for="exampleInputEmail1">Email address</label>
-						<input
-							type="email"
-							className="form-control"
-							id="exampleInputEmail1"
-							aria-describedby="emailHelp"
-							onChange={this.changeHandler("email")}
-						/>
-						<small id="emailHelp" className="form-text text-muted">
-							We'll never share your email with anyone else.
-						</small>
-					</div>
-					<div className="form-group">
-						<label for="exampleInputPassword1">Password</label>
-						<input
-							type="password"
-							className="form-control"
-							id="exampleInputPassword1"
-							onChange={this.changeHandler("password")}
-						/>
-					</div>
+	errorMessage = () => (
+		<div className="alert alert-danger" role="alert">
+			<p> getting some error</p>
+			{this.state.error}
+		</div>
+	);
 
-					<button type="submit" className="btn btn-primary">
-						Submit
-					</button>
-				</form>
-				{"email: " + email + " "}
-				{"password:" + password + " "}
-				{"error:" +  error+ " "}
-				{"success:" + success + " "}
-				{"redirect:" + redirect + " "}
-			</div>
+	successMessage = () => (
+		<div className="alert alert-success" role="alert">
+			<p>user successfully signedIn</p>
+		</div>
+	);
+
+	render() {
+		const spinner = <Spinner />;
+		const successElement = this.state.success
+			? this.successMessage()
+			: null;
+		const errorElement = this.state.error ? this.errorMessage() : null;
+		return (
+			<Aux>
+				{successElement}
+				{errorElement}
+				{this.state.isLoading ? (
+					spinner
+				) : (
+					<SignInForm
+						user={this.state.values}
+						handleChange={this.handleChange}
+						submitHandler={this.submitHandler}
+					/>
+				)}
+			</Aux>
 		);
 	}
 }

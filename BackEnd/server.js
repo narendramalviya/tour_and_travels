@@ -41,10 +41,35 @@ app.get("/", (req, res) => {
 	res.send("Home page");
 });
 
+let allowCrossDomain = function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', "*");
+  res.header('Access-Control-Allow-Headers', "*");
+  next();
+}
+app.use(allowCrossDomain);
+// ---------------------------------------------------
+
+
+// test routes
+ app.get("/setCookie", (req, res) => {
+ 	// res.header('Access-Control-Allow-Credentials', true);
+ 	// res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+
+	res.cookie("newcookie","7742401557",{"expire":400000+Date.now()});
+	res.send("cookie set");
+});
+app.get("/getCookie", (req, res) => {
+	res.send(req.cookies['newcookie']);
+});
+
+
+// ---------------------------------------------------
+
 // routes
 app.use("/api", tourPackageRoutes);
 app.use("/api", authRoutes);
 app.use("/api", userRoutes);
+
 
 //listen the requests
 const port = 7000;

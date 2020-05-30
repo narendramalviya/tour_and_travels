@@ -1,18 +1,18 @@
 import React, { Component } from "react";
-// import { signup } from "./api/userApi";
-// import { API } from "../../backend";
-import UserForm from "./api/UserForm";
+import { signup } from "./api/userApi";
+import SignUpForm from "./api/SignUpForm";
 import Aux from "../../hoc/Aux/Aux";
-
+import Spinner from "../../hoc/UI/Spinner/Spinner";
 export default class SignUp extends Component {
 	state = {
 		values: {
-			name: "test3",
-			lastname: "test3lastname",
-			email: "test3@mail.com",
-			password: "1234",
+			name: "test1",
+			lastname: "test1lastName",
+			email: "test1@mail.com",
+			password: 1234,
 		},
-		error: false,
+		isLoading: false,
+		error: null,
 		success: false,
 	};
 
@@ -25,25 +25,48 @@ export default class SignUp extends Component {
 
 	submitHandler = (event) => {
 		event.preventDefault();
-		this.setState({ success: true }, () =>
-			alert(JSON.stringify(this.state))
-		);
+		this.setState({ isLoading: true });
 		//TODO:fire signup request here??
+		signup(this.state.values)
+			.then((data) => {
+				console.log(data);
+				if (data.error) {
+					this.setState({
+						error: JSON.stringify(data.error),
+						isLoading: false,
+						success: false,
+					});
+				} else {
+					this.setState({ success: true, error: null });
+					setTimeout(() => {
+						this.props.history.push("/signin");
+					}, 3000);
+				}
+			})
+			.catch((error) => {
+				this.setState({
+					error: "error at server" + JSON.stringify(error),
+					isLoading: false,
+					success: false,
+				});
+				console.log(error);
+			});
 	};
 	errorMessage = () => (
-		<div class="alert alert-danger" role="alert">
-			<p>some error occur</p>
+		<div className="alert alert-danger" role="alert">
+			<p> getting some error</p>
 			{this.state.error}
 		</div>
 	);
 
 	successMessage = () => (
-		<div class="alert alert-success" role="alert">
-			<p>user signedUp successfully</p>
+		<div className="alert alert-success" role="alert">
+			<p>user successfully signedUp</p>
 		</div>
 	);
 
 	render() {
+		const spinner = <Spinner />;
 		const successElement = this.state.success
 			? this.successMessage()
 			: null;
@@ -52,11 +75,15 @@ export default class SignUp extends Component {
 			<Aux>
 				{successElement}
 				{errorElement}
-				<UserForm
-					user={this.state.values}
-					handleChange={this.handleChange}
-					submitHandler={this.submitHandler}
-				/>
+				{this.state.isLoading ? (
+					spinner
+				) : (
+					<SignUpForm
+						user={this.state.values}
+						handleChange={this.handleChange}
+						submitHandler={this.submitHandler}
+					/>
+				)}
 			</Aux>
 		);
 	}
