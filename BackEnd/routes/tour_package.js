@@ -55,8 +55,8 @@ router.put(
 			min: 2,
 		}),
 		check(
-			"discription",
-			"discription must be require at least 5 char"
+			"description",
+			"description must be require at least 5 char"
 		).isLength({ min: 5 }),
 		check("country", "country must be require at least 2 char").isLength({
 			min: 2,

@@ -1,20 +1,18 @@
-import React from 'react'
-import { Route,withRouter,Redirect } from 'react-router-dom'
-import { isAuthenticate ,isAdmin} from '../user/api/userApi'
+import React from "react";
+import { Route, Redirect } from "react-router-dom";
+import { isAuthenticate, isAdmin } from "../user/api/userApi";
 
-const AdminRoute =({component:Component ,...rest})=>  (
-        <Route 
-           {...rest}
-           render={(props) => isAuthenticate() && isAdmin() ? <Component {...props}/>  }
-        />
-    )
+const AdminRoute = ({ component: Component, ...rest }) => (
+	<Route
+		{...rest}
+		render={(props) =>(
+			isAuthenticate() && isAdmin() ? (
+				<Component {...props} />
+			) : (
+				<Redirect to={{ pathname: "/signin", state: props.location }} />
+			))
+		}
+	/>
+);
 
-
-
-    // const ProtectedRoute = ({ component: Component, ...rest }) => (
-    //     <Route {...rest} render={(props) => (
-    //        fakeAuthCentralState.isAuthenticated === true ? 
-    //           <Component {...props} /> : <Redirect to={{ pathname: '/login', state: { from: props.location }}} />   
-    //     )} />
-    //  );
-export default  AdminRoute
+export default AdminRoute;

@@ -50,7 +50,7 @@ export const signout = (next) => {
 		localStorage.removeItem("jwt");
 		next();
 
-		return fetch(`${API}/signout`, {
+		return fetch(`${API}/user/signout`, {
 			method: "GET",
 		})
 			.then((response) => console.log("signout success"))
@@ -58,11 +58,8 @@ export const signout = (next) => {
 	}
 };
 
-export const isAdmin =() =>{
-		if(window === undefined)
-		  return false;
-		if(localStorage.getItem("jwt")){
-			const user = localStorage.getItem("jwt");
-            return user.role === 1;
-		}
-}
+export const isAdmin = () => {
+	const data = isAuthenticate();
+	if(data) return data.user.role === 1;
+	else return false;
+};

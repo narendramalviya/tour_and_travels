@@ -7,7 +7,7 @@ const expressJwt = require("express-jwt");
 exports.signin = (req, res) => {
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
-		res.status(422).json({
+		return res.status(422).json({
 			error: errors.array(),
 		});
 	}
@@ -31,9 +31,6 @@ exports.signin = (req, res) => {
      
 		// send response to frontend
 		const { _id, name, lastname, email, role, purchases } = user;
-	    res.header('Access-Control-Allow-Credentials', true);
-		res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-      
 		return res.json({
 			token,
 			user: { _id, name, lastname, email, role, purchases },

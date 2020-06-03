@@ -3,15 +3,17 @@ import { signin, authenticate } from "./api/userApi";
 import Aux from "../../hoc/Aux/Aux";
 import Spinner from "../../hoc/UI/Spinner/Spinner";
 import SignInForm from "./api/SignInForm";
+import { Redirect } from "react-router-dom";
 export default class SignIn extends Component {
 	state = {
 		values: {
 			email: "test1@mail.com",
-			password: 1234,
+			password: "1234",
 		},
 		isLoading: false,
 		error: null,
 		success: false,
+		redirect:false
 	};
 
 	handleChange = (event) => {
@@ -20,7 +22,11 @@ export default class SignIn extends Component {
 			values: { ...this.state.values, [name]: value },
 		});
 	};
-
+    performRedirect =()=>{
+        if(this.state.redirect){
+			return <Redirect to='/' />
+		}
+	}
 	submitHandler = (event) => {
 		event.preventDefault();
 		this.setState({ isLoading: true });
@@ -40,6 +46,7 @@ export default class SignIn extends Component {
 							success: true,
 							error: null,
 							isLoading: false,
+							redirect:true
 						});
 					});
 				}
@@ -49,6 +56,7 @@ export default class SignIn extends Component {
 					error: "failed to fetch",
 					isLoading: false,
 					success: false,
+				    redirect:false
 				});
 				console.log(error);
 			});
@@ -74,12 +82,14 @@ export default class SignIn extends Component {
 		const errorElement = this.state.error ? this.errorMessage() : null;
 		return (
 			<Aux>
+				{this.performRedirect()}
 				{successElement}
 				{errorElement}
 				{this.state.isLoading ? (
 					spinner
 				) : (
 					<SignInForm
+
 						user={this.state.values}
 						handleChange={this.handleChange}
 						submitHandler={this.submitHandler}

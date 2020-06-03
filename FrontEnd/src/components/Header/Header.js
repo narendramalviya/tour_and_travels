@@ -1,13 +1,17 @@
 import React from "react";
 // import from ''
 import classes from "./Header.css";
-import { NavLink, Redirect } from "react-router-dom";
-const header = () => {
+import { NavLink, withRouter } from "react-router-dom";
+import { signout, isAuthenticate, isAdmin } from "../user/api/userApi";
+import { Fragment } from "react";
+const header = (props) => {
 	return (
 		<div className={classes.Header}>
 			<ul className={classes.Items}>
 				<li>
-					<NavLink to="/" className='active'>Home</NavLink>
+					<NavLink to="/" className="active">
+						Home
+					</NavLink>
 				</li>
 				<li>
 					<NavLink to="/tour-packages">Tour-Packages</NavLink>
@@ -24,30 +28,39 @@ const header = () => {
 				<li>
 					<NavLink to="/about">About</NavLink>
 				</li>
-				
 				<li>
-					<NavLink to="/admin">Admin-Dash</NavLink>
+					{isAuthenticate() && isAdmin() ? (
+						<NavLink to="/admin">Admin-Dash</NavLink>
+					) : (
+						isAuthenticate() && (
+							<NavLink to="/user/dashboard">User-Dash</NavLink>
+						)
+					)}
 				</li>
-				<li>
-					<NavLink to="/user/dashboard">User-Dash</NavLink>
-				</li>
-				<li>
-					<NavLink to="/signin">Sign in</NavLink>
-				</li>
-			
-				<li>
-					<NavLink to="/signup">Sign up</NavLink>
-				</li>
-				<li>
-					<span onClick={()=>{
-						// TODO: complete this!!
-						alert("signed out clicked!!");
-					return <Redirect to="/signin" />
-					}}>Sign out</span>
-				</li>
+				{ isAuthenticate() ? (
+					<li>
+						<span
+							onClick={() => {
+								signout(() => props.history.push("/"));
+							}}
+						>
+							Sign out
+						</span>
+					</li>
+				) : (
+					<Fragment>
+						<li>
+							<NavLink to="/signin">Sign in</NavLink>
+						</li>
+
+						<li>
+							<NavLink to="/signup">Sign up</NavLink>
+						</li>
+					</Fragment>
+				)}
 			</ul>
 		</div>
 	);
 };
 
-export default header;
+export default withRouter(header);

@@ -84,7 +84,7 @@ exports.updateTourPackage = (req, res) => {
 //Delete a package with the specified packageId in the request
 exports.deleteTourPackage = (req, res) => {
 	Tour_package.findByIdAndRemove(req.tourPackage._id, (err, tourPkg) => {
-		if (err || !tourPkgs) {
+		if (err || !tourPkg) {
 			if (err.kind === "ObjectId" || err.name === "NotFound") {
 				return res.status(404).send({
 					message: "Package not found with id " + req.tourPackage._id,

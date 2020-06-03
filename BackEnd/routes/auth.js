@@ -50,6 +50,6 @@ router.post(
 
 // signOut
 
-router.get("/user/signout/:userId", signout);
+router.get("/user/signout", signout);
 
 module.exports = router;
